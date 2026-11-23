@@ -28,3 +28,15 @@ tasks.test {
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
+
+tasks.register<JavaExec>("benchmark") {
+    group = "application"
+    description = "Measure all renderers and write benchmark results to CSV."
+    dependsOn(tasks.test)
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("mandelbrot.benchmark.BenchmarkRunner")
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    })
+    maxHeapSize = "1g"
+}
