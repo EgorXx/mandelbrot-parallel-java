@@ -1,5 +1,6 @@
 plugins {
     java
+    application
 }
 
 group = "mandelbrot"
@@ -9,6 +10,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+application {
+    mainClass.set("mandelbrot.cli.Main")
 }
 
 repositories {
